@@ -9,15 +9,17 @@ function getThumbnail() {
     if (videoId) {
         document.getElementById("thumbnail-container").classList.remove("hidden");
 
-        let maxresImg = `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
-        let hqImg = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
-        let sdImg = `https://img.youtube.com/vi/${videoId}/sddefault.jpg`;
-        let defaultImg = `https://img.youtube.com/vi/${videoId}/default.jpg`;
+        let thumbnails = {
+            maxres: `https://i.ytimg.com/vi/${videoId}/maxresdefault.jpg`,
+            hq: `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`,
+            sd: `https://i.ytimg.com/vi/${videoId}/sddefault.jpg`,
+            default: `https://i.ytimg.com/vi/${videoId}/default.jpg`
+        };
 
-        checkImage(maxresImg, "maxres", "maxresDownload");
-        checkImage(hqImg, "hq", "hqDownload");
-        checkImage(sdImg, "sd", "sdDownload");
-        checkImage(defaultImg, "default", "defaultDownload");
+        Object.keys(thumbnails).forEach(type => {
+            checkImage(thumbnails[type], type);
+        });
+
     } else {
         alert("⚠️ Invalid YouTube URL! Please enter a valid URL.");
     }
@@ -29,15 +31,18 @@ function extractVideoID(url) {
     return match ? match[1] : null;
 }
 
-function checkImage(url, imgId, linkId) {
+function checkImage(url, type) {
     let img = new Image();
     img.src = url;
     img.onload = function () {
-        document.getElementById(imgId).src = url;
-        document.getElementById(linkId).href = url;
+        document.getElementById(type).src = url;
+        document.getElementById(type + "Download").href = url;
+        document.getElementById(type).style.display = "block";
     };
     img.onerror = function () {
         console.warn(`❌ Image not found: ${url}`);
+        document.getElementById(type).style.display = "none";
+        document.getElementById(type + "Download").style.display = "none";
     };
 }
 
