@@ -1,3 +1,33 @@
+.thumbnail {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center horizontally */
+    justify-content: center; /* Center vertically */
+    margin: 20px 0;
+}
+
+.thumbnail img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.thumbnail a {
+    margin-top: 10px;
+    text-decoration: none;
+    background-color: #ff0000;
+    color: white;
+    padding: 8px 12px;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background 0.3s;
+}
+
+.thumbnail a:hover {
+    background-color: #cc0000;
+}
+
 body {
     font-family: Arial, sans-serif;
     background: #f4f4f4;
