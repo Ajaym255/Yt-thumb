@@ -3,24 +3,25 @@ function getThumbnail() {
     let videoId = extractVideoID(url);
 
     if (!videoId) {
-        alert("Invalid YouTube URL! Please check again.");
+        alert("❌ Invalid YouTube URL! Please enter a valid link.");
         return;
     }
 
-    let hdUrl = `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
-    let sdUrl = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
+    document.getElementById("maxres").src = `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
+    document.getElementById("hq").src = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
+    document.getElementById("sd").src = `https://img.youtube.com/vi/${videoId}/sddefault.jpg`;
+    document.getElementById("default").src = `https://img.youtube.com/vi/${videoId}/default.jpg`;
 
-    document.getElementById("hdThumbnail").src = hdUrl;
-    document.getElementById("sdThumbnail").src = sdUrl;
-
-    document.getElementById("hdDownload").href = hdUrl;
-    document.getElementById("sdDownload").href = sdUrl;
+    document.getElementById("maxresDownload").href = `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
+    document.getElementById("hqDownload").href = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
+    document.getElementById("sdDownload").href = `https://img.youtube.com/vi/${videoId}/sddefault.jpg`;
+    document.getElementById("defaultDownload").href = `https://img.youtube.com/vi/${videoId}/default.jpg`;
 
     document.getElementById("thumbnail-container").classList.remove("hidden");
 }
 
 function extractVideoID(url) {
-    let match = url.match(/(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:[^\/]+\/[^\/]+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/);
+    let match = url.match(/(?:youtu\.be\/|youtube\.com\/(?:.*v=|.*\/))([^&]+)/);
     return match ? match[1] : null;
 }
 
