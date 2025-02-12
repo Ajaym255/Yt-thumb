@@ -1,31 +1,46 @@
+document.addEventListener("DOMContentLoaded", function () {
+    document.getElementById("darkModeToggle").addEventListener("click", toggleDarkMode);
+});
+
 function getThumbnail() {
-    let url = document.getElementById("videoUrl").value;
-    let videoId = extractVideoID(url);
+    let videoUrl = document.getElementById("videoUrl").value;
+    let videoId = extractVideoID(videoUrl);
 
-    if (!videoId) {
-        alert("❌ Invalid YouTube URL! Please enter a valid link.");
-        return;
+    if (videoId) {
+        document.getElementById("thumbnail-container").classList.remove("hidden");
+
+        let maxresImg = `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
+        let hqImg = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
+        let sdImg = `https://img.youtube.com/vi/${videoId}/sddefault.jpg`;
+        let defaultImg = `https://img.youtube.com/vi/${videoId}/default.jpg`;
+
+        checkImage(maxresImg, "maxres", "maxresDownload");
+        checkImage(hqImg, "hq", "hqDownload");
+        checkImage(sdImg, "sd", "sdDownload");
+        checkImage(defaultImg, "default", "defaultDownload");
+    } else {
+        alert("⚠️ Invalid YouTube URL! Please enter a valid URL.");
     }
-
-    document.getElementById("maxres").src = `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
-    document.getElementById("hq").src = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
-    document.getElementById("sd").src = `https://img.youtube.com/vi/${videoId}/sddefault.jpg`;
-    document.getElementById("default").src = `https://img.youtube.com/vi/${videoId}/default.jpg`;
-
-    document.getElementById("maxresDownload").href = `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
-    document.getElementById("hqDownload").href = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
-    document.getElementById("sdDownload").href = `https://img.youtube.com/vi/${videoId}/sddefault.jpg`;
-    document.getElementById("defaultDownload").href = `https://img.youtube.com/vi/${videoId}/default.jpg`;
-
-    document.getElementById("thumbnail-container").classList.remove("hidden");
 }
 
 function extractVideoID(url) {
-    let match = url.match(/(?:youtu\.be\/|youtube\.com\/(?:.*v=|.*\/))([^&]+)/);
+    let regex = /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/;
+    let match = url.match(regex);
     return match ? match[1] : null;
 }
 
-// Dark Mode Toggle
-document.getElementById("darkModeToggle").addEventListener("click", () => {
+function checkImage(url, imgId, linkId) {
+    let img = new Image();
+    img.src = url;
+    img.onload = function () {
+        document.getElementById(imgId).src = url;
+        document.getElementById(linkId).href = url;
+    };
+    img.onerror = function () {
+        console.warn(`❌ Image not found: ${url}`);
+    };
+}
+
+function toggleDarkMode() {
     document.body.classList.toggle("dark-mode");
-});
+}
