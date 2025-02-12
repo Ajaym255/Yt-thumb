@@ -1,130 +1,63 @@
+/* ✅ Basic Styles */
 body {
     font-family: Arial, sans-serif;
     background: #f4f4f4;
-    text-align: center;
-    padding: 20px;
-}
-
-.container {
-    max-width: 600px;
-    margin: auto;
-    background: white;
-    padding: 20px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-}
-
-input {
-    width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-    border: 1px solid #ccc;
-}
-
-button {
-    background: #ff0000;
-    color: white;
-    padding: 10px;
-    border: none;
-    cursor: pointer;
-}
-
-button:hover {
-    background: #cc0000;
-}
-
-/* Dark Mode */
-.dark-mode {
-    background: #121212;
-    color: white;
-}
-
-body {
-    font-family: 'Arial', sans-serif;
-    background-color: #f4f4f4;
     text-align: center;
     margin: 0;
     padding: 20px;
 }
 
+/* ✅ Container Box */
 .container {
     max-width: 600px;
+    margin: auto;
     background: white;
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    margin: auto;
 }
 
+/* ✅ Headings */
 h1 {
     font-size: 24px;
     color: #333;
 }
 
+/* ✅ Input Box */
 input {
     width: 90%;
     padding: 10px;
-    margin-top: 10px;
+    margin: 10px 0;
     border-radius: 5px;
     border: 1px solid #ccc;
 }
 
+/* ✅ Buttons */
 button {
-    margin-top: 10px;
-    background: #28a745;
+    background: #ff0000;
     color: white;
     padding: 10px 15px;
     border: none;
     cursor: pointer;
     border-radius: 5px;
     font-size: 16px;
+    transition: background 0.3s;
 }
 
 button:hover {
-    background: #218838;
+    background: #cc0000;
 }
 
-.thumbnail {
-    margin-top: 15px;
-}
-
-.thumbnail img {
-    width: 100%;
-    max-width: 400px;
-    border-radius: 5px;
-    margin-bottom: 10px;
-}
-
-.thumbnail a {
-    display: block;
-    background: #007bff;
-    color: white;
-    padding: 8px;
-    text-decoration: none;
-    border-radius: 5px;
-    margin-top: 5px;
-}
-
-.thumbnail a:hover {
-    background: #0056b3;
-}
-
-.hidden {
-    display: none;
-}
-
+/* ✅ Dark Mode Toggle Button */
 #darkModeToggle {
     margin-top: 20px;
     background: #333;
     color: white;
 }
 
-.dark-mode {
-    background: #121212;
-    color: white;
-}
-
-.dark-mode .container {
-    background: #222;
+/* ✅ Thumbnail Section */
+.thumbnail-container {
+    margin-top: 20px;
 }
 
 .thumbnail {
@@ -136,8 +69,8 @@ button:hover {
 }
 
 .thumbnail img {
-    max-width: 100%;
-    height: auto;
+    width: 100%;
+    max-width: 400px;
     border-radius: 8px;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
     display: block;
@@ -146,7 +79,7 @@ button:hover {
 .thumbnail a {
     margin-top: 10px;
     text-decoration: none;
-    background-color: #ff0000;
+    background-color: #007bff;
     color: white;
     padding: 8px 12px;
     border-radius: 5px;
@@ -156,5 +89,32 @@ button:hover {
 }
 
 .thumbnail a:hover {
-    background-color: #cc0000;
+    background-color: #0056b3;
+}
+
+/* ✅ Hidden Class (For Initial Hide) */
+.hidden {
+    display: none;
+}
+
+/* ✅ Dark Mode */
+.dark-mode {
+    background: #121212;
+    color: white;
+}
+
+.dark-mode .container {
+    background: #222;
+}
+
+.dark-mode button {
+    background: #444;
+}
+
+.dark-mode .thumbnail a {
+    background: #ff0000;
+}
+
+.dark-mode .thumbnail a:hover {
+    background: #cc0000;
 }
