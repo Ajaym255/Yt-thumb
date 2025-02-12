@@ -1,3 +1,6 @@
+/* Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
 body {
     font-family: 'Poppins', sans-serif;
     background-color: #f8f9fa;
@@ -20,11 +23,6 @@ h1 {
     margin-bottom: 10px;
 }
 
-p {
-    font-size: 16px;
-    color: #555;
-}
-
 input {
     width: 80%;
     padding: 10px;
@@ -40,6 +38,7 @@ button {
     padding: 10px 15px;
     border-radius: 5px;
     cursor: pointer;
+    font-size: 16px;
 }
 
 button:hover {
@@ -64,6 +63,7 @@ button:hover {
     padding: 8px;
     text-decoration: none;
     border-radius: 5px;
+    font-weight: bold;
 }
 
 .thumbnail a:hover {
@@ -74,7 +74,6 @@ button:hover {
     display: none;
 }
 
-/* Dark Mode */
 #darkModeToggle {
     margin-top: 20px;
     background: #333;
@@ -98,33 +97,9 @@ button:hover {
     color: white;
 }
 
-/* SEO Optimized Content */
-.seo-content {
-    margin-top: 20px;
-    padding: 15px;
-    background: #f9f9f9;
-    border-radius: 8px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-}
-
-.seo-content h2 {
-    font-size: 22px;
-    color: #333;
-    margin-bottom: 10px;
-}
-
-.seo-content p {
-    font-size: 16px;
-    color: #555;
-    line-height: 1.6;
-}
-
-.seo-content ol, .seo-content ul {
-    padding-left: 20px;
-}
-
-.seo-content li {
-    font-size: 16px;
-    color: #444;
-    margin-bottom: 5px;
+/* Mobile Responsive */
+@media (max-width: 600px) {
+    .container {
+        width: 90%;
+    }
 }
