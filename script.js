@@ -1,22 +1,13 @@
-document.addEventListener("DOMContentLoaded", function () {
-    console.log("🚀 Script Loaded Successfully!");
-
-    document.getElementById("darkModeToggle").addEventListener("click", toggleDarkMode);
-    console.log("🌙 Dark Mode Toggle Initialized!");
-});
-
 function getThumbnail() {
     let videoUrl = document.getElementById("videoUrl").value.trim();
-    console.log("📌 Entered URL: ", videoUrl);
-
+    
     if (!videoUrl) {
         alert("⚠️ Please enter a YouTube video URL!");
         return;
     }
 
     let videoId = extractVideoId(videoUrl);
-    console.log("🔎 Extracted Video ID: ", videoId);
-
+    
     if (!videoId) {
         alert("❌ Invalid YouTube URL! Please enter a correct URL.");
         return;
@@ -28,17 +19,14 @@ function getThumbnail() {
     let sdUrl = `https://img.youtube.com/vi/${videoId}/sddefault.jpg`;
     let defaultUrl = `https://img.youtube.com/vi/${videoId}/default.jpg`;
 
-    console.log("🖼️ Thumbnail URLs Generated:", { maxResUrl, hqUrl, sdUrl, defaultUrl });
-
-    // Update Image Elements
-    updateThumbnail("maxres", maxResUrl);
-    updateThumbnail("hq", hqUrl);
-    updateThumbnail("sd", sdUrl);
-    updateThumbnail("default", defaultUrl);
+    // Update Image & Download Button
+    setThumbnail("maxres", maxResUrl);
+    setThumbnail("hq", hqUrl);
+    setThumbnail("sd", sdUrl);
+    setThumbnail("default", defaultUrl);
 
     // Show Thumbnail Section
     document.getElementById("thumbnail-container").classList.remove("hidden");
-    console.log("✅ Thumbnails Updated & Visible!");
 }
 
 function extractVideoId(url) {
@@ -46,19 +34,19 @@ function extractVideoId(url) {
     return match ? match[1] : null;
 }
 
-function updateThumbnail(id, url) {
+function setThumbnail(id, url) {
     let img = document.getElementById(id);
     let link = document.getElementById(id + "Download");
 
     img.src = url;
-    img.style.display = "block";
+    img.style.display = "block";  // ✅ Now image will be visible
+    
     link.href = url;
-    link.style.display = "inline-block";
-
-    console.log(`✅ ${id} Thumbnail Updated: ${url}`);
+    link.setAttribute("download", id + ".jpg"); // ✅ Set download attribute
+    link.style.display = "block"; // ✅ Now Download button will be visible
 }
 
-function toggleDarkMode() {
+// 🌙 Dark Mode Toggle
+document.getElementById("darkModeToggle").addEventListener("click", function () {
     document.body.classList.toggle("dark-mode");
-    console.log("🌙 Dark Mode Toggled!");
-}
+});
