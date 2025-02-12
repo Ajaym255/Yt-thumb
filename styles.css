@@ -1,3 +1,33 @@
+.seo-content {
+    margin-top: 20px;
+    padding: 15px;
+    background: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.seo-content h2 {
+    font-size: 22px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.seo-content p {
+    font-size: 16px;
+    color: #555;
+    line-height: 1.6;
+}
+
+.seo-content ol, .seo-content ul {
+    padding-left: 20px;
+}
+
+.seo-content li {
+    font-size: 16px;
+    color: #444;
+    margin-bottom: 5px;
+}
+
 body {
     font-family: 'Arial', sans-serif;
     background-color: #f4f4f4;
