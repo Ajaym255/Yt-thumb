@@ -3,47 +3,49 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 function getThumbnail() {
-    let videoUrl = document.getElementById("videoUrl").value;
-    let videoId = extractVideoID(videoUrl);
-
-    if (videoId) {
-        document.getElementById("thumbnail-container").classList.remove("hidden");
-
-        let thumbnails = {
-            maxres: `https://i.ytimg.com/vi/${videoId}/maxresdefault.jpg`,
-            hq: `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`,
-            sd: `https://i.ytimg.com/vi/${videoId}/sddefault.jpg`,
-            default: `https://i.ytimg.com/vi/${videoId}/default.jpg`
-        };
-
-        Object.keys(thumbnails).forEach(type => {
-            checkImage(thumbnails[type], type);
-        });
-
-    } else {
-        alert("⚠️ Invalid YouTube URL! Please enter a valid URL.");
+    let videoUrl = document.getElementById("videoUrl").value.trim();
+    
+    if (!videoUrl) {
+        alert("⚠️ Please enter a YouTube video URL!");
+        return;
     }
+
+    let videoId = extractVideoId(videoUrl);
+    
+    if (!videoId) {
+        alert("❌ Invalid YouTube URL! Please enter a correct URL.");
+        return;
+    }
+
+    // Thumbnail URLs
+    let maxResUrl = `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
+    let hqUrl = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
+    let sdUrl = `https://img.youtube.com/vi/${videoId}/sddefault.jpg`;
+    let defaultUrl = `https://img.youtube.com/vi/${videoId}/default.jpg`;
+
+    // Update Image Elements
+    updateThumbnail("maxres", maxResUrl);
+    updateThumbnail("hq", hqUrl);
+    updateThumbnail("sd", sdUrl);
+    updateThumbnail("default", defaultUrl);
+
+    // Show Thumbnail Section
+    document.getElementById("thumbnail-container").classList.remove("hidden");
 }
 
-function extractVideoID(url) {
-    let regex = /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/;
-    let match = url.match(regex);
+function extractVideoId(url) {
+    let match = url.match(/(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/);
     return match ? match[1] : null;
 }
 
-function checkImage(url, type) {
-    let img = new Image();
+function updateThumbnail(id, url) {
+    let img = document.getElementById(id);
+    let link = document.getElementById(id + "Download");
+
     img.src = url;
-    img.onload = function () {
-        document.getElementById(type).src = url;
-        document.getElementById(type + "Download").href = url;
-        document.getElementById(type).style.display = "block";
-    };
-    img.onerror = function () {
-        console.warn(`❌ Image not found: ${url}`);
-        document.getElementById(type).style.display = "none";
-        document.getElementById(type + "Download").style.display = "none";
-    };
+    img.style.display = "block";
+    link.href = url;
+    link.style.display = "inline-block";
 }
 
 function toggleDarkMode() {
